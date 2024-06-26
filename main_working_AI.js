@@ -31,7 +31,7 @@ function convertToGeoJSON(jsonOutput) {
     return null;
   }
 
-  console.log('the processing should be running now');
+  console.log('the processing shoudl be running now')
 
   return {
     "type": "FeatureCollection",
@@ -52,7 +52,7 @@ function convertToGeoJSON(jsonOutput) {
   };
 }
 
-// Coverage check for 400 error, (bad request) or 404 error (survey not found), or 200 (good).
+//coveage check for 400 error, (bad request) or 404 error (survey not found), or 200 (good).
 function coverageChecker(token_request_url) {
   console.log(token_request_url);
 
@@ -102,6 +102,7 @@ function token_req_fun() {
   var download_url;
   var aiResourceId;
 
+
   var token_request_url =
     "https://api.nearmap.com/coverage/v2/tx/address?address=" +
     full_address +
@@ -128,7 +129,7 @@ function token_req_fun() {
   console.log(`report type is ${resource_type}`);
   coverageChecker(token_request_url); //checks for 400 error, (bad request) or 404 error (survey not found), or 200 (good).
 
-  // Set the payload for the token request
+  //set the payload for the token request
   fetch(token_request_url)
     .then((res) => res.json())
     .then((data) => {
@@ -148,73 +149,58 @@ function token_req_fun() {
 
       if (resource_type === "raster%3A") {
         download_url = `https://api.nearmap.com/staticmap/v3/surveys/${survey_id}/${report_type}.${format}?bbox=${bbox}&transactionToken=${token}`;
-
-        console.log(`download_URL is ${download_url}`);
-        fetch(download_url)
-          .then(resp => resp.blob())
-          .then(blob => {
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = url;
-            // The filename you want       
-            var formatted_file_name = full_address.replace(/%20/g, "_");
-            formatted_file_name = formatted_file_name.replace(/%2C/g, "_");
-            a.download = `${report_type}_${formatted_file_name}.${format}`;
-            document.body.appendChild(a);
-            a.click();
-            window.URL.revokeObjectURL(url);
-          })
-          .catch(() => alert('oh no!'));
       } else {
         download_url = `https://api.nearmap.com/ai/features/v4/tx/surveyresources/${aiResourceId}/features.${format}?transactionToken=${token}`;
-        console.log(`download_URL is ${download_url}`);
-        fetch(download_url)
-          .then(resp => resp.blob())
-          .then(blob => {
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = url;
-
-            // Download the file OLD CODE
-            var formatted_file_name = full_address.replace(/%20/g, "_");
-            formatted_file_name = formatted_file_name.replace(/%2C/g, "_");
-            // a.download = `${report_type}_${formatted_file_name}.${format}`;
-            // document.body.appendChild(a);
-            // a.click();
-            // window.URL.revokeObjectURL(url);
-
-            // Convert JSON output to GeoJSON
-            blob.text().then(text => {
-              const geoJson = convertToGeoJSON(JSON.parse(text));
-              const geoJsonString = JSON.stringify(geoJson, null, 2);
-
-              // Create a Blob object from the GeoJSON string
-              const geoJsonBlob = new Blob([geoJsonString], { type: 'application/json' });
-
-              // Create a URL for the Blob object
-              const geoJsonUrl = window.URL.createObjectURL(geoJsonBlob);
-
-              // Create a new anchor element for downloading the GeoJSON file
-              const geoJsonLink = document.createElement('a');
-              geoJsonLink.style.display = 'none';
-              geoJsonLink.href = geoJsonUrl;
-              geoJsonLink.download = `${report_type}_${formatted_file_name}.geojson`;
-
-              // Append the anchor element to the document body and trigger the click event to initiate download
-              document.body.appendChild(geoJsonLink);
-              geoJsonLink.click();
-
-              // Cleanup by revoking the URL object
-              window.URL.revokeObjectURL(geoJsonUrl);
-            });
-          })
-          .catch(() => alert('oh no!'));
       }
+
+      console.log(`download_URL is ${download_url}`);
+      fetch(download_url)
+        .then(resp => resp.blob())
+        .then(blob => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.style.display = 'none';
+          a.href = url;
+      
+          // Download the file
+          var formatted_file_name = full_address.replace(/%20/g, "_");
+          formatted_file_name = formatted_file_name.replace(/%2C/g, "_");
+          a.download = `${report_type}_${formatted_file_name}.${format}`;
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(url);
+      
+          // Convert JSON output to GeoJSON
+          blob.text().then(text => {
+            const geoJson = convertToGeoJSON(JSON.parse(text));
+            const geoJsonString = JSON.stringify(geoJson, null, 2);
+            
+            // Create a Blob object from the GeoJSON string
+            const geoJsonBlob = new Blob([geoJsonString], { type: 'application/json' });
+            
+            // Create a URL for the Blob object
+            const geoJsonUrl = window.URL.createObjectURL(geoJsonBlob);
+            
+            // Create a new anchor element for downloading the GeoJSON file
+            const geoJsonLink = document.createElement('a');
+            geoJsonLink.style.display = 'none';
+            geoJsonLink.href = geoJsonUrl;
+            geoJsonLink.download = `${report_type}_${formatted_file_name}.geojson`;
+            
+            // Append the anchor element to the document body and trigger the click event to initiate download
+            document.body.appendChild(geoJsonLink);
+            geoJsonLink.click();
+            
+            // Cleanup by revoking the URL object
+            window.URL.revokeObjectURL(geoJsonUrl);
+          });
+        })
+        .catch(() => alert('oh no!'));
+      
+     
     })
 
-    // Console logs for testing
+    // console logs for testing
     .then(() => {
       console.log(payload);
       console.log(`token is ${token}`);

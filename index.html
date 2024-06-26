@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Connor Tluck SA Nearmap">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Nearmap TX API Sandbox ALL ACCESS</title>
+    <title>Nearmap TX API Sandbox AI LAYERS</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/headers/">
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -258,7 +258,7 @@
 
 
 
-<main>
+<main class="m-4"> <!-- Add m-4 class for margin on all sides -->
   <h1 class="visually-hidden">Headers examples</h1>
 
   <div class="container">
@@ -269,7 +269,7 @@
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
           <img src="\images\np_logo.jpg" class="bi me-3" width="160" height="46" alt="Nearmap Logo">
         </a>
-        <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="index.html" class="nav-link" aria-current="page">Home</a></li>
         <li class="nav-item"><a href="https://docs.nearmap.com/display/ND/NEARMAP+APIS" target="_blank" rel="noopener noreferrer" class="nav-link">API Docs</a></li>
         <li class="nav-item"><a href="https://docs.nearmap.com/display/ND/Nearmap+Roof+Condition+Output" target="_blank" rel="noopener noreferrer"class="nav-link">Report Output Docs</a></li>
         <li class="nav-item"><a href="https://docs.nearmap.com/display/ND/Generate+Roof+Condition+Output" target="_blank" rel="noopener noreferrer"class="nav-link">Generating A Report</a></li>
@@ -281,7 +281,7 @@
   </head>
     <div class="h-100 p-5 bg-light border rounded-3">
       <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold" >Nearmap TX API Sandbox</h1>
+        <h1 class="display-5 fw-bold" >Nearmap TX API Sandbox AI LAYERS</h1>
         <p class="col-md-8 fs-4">Quick Download tool which leverages the Transactional API to pull Suite of Nearmap Content</p>
         <p class="col-md-8 fs-4">Download may take a few secconds see HEADER for information on how to attain an API Key.</p>
 
@@ -381,6 +381,19 @@
                   <option>jgw</option>
                   <option>pgw</option>
                   <option>tfw</option>
+                  <option>json</option>
+                </select>
+              </div>
+            </div>
+            <hr class="my-4">
+            <h4 class="mb-3">AI/Imagery</h4>
+            <div class="col-12">
+              <div class="col-md-3">
+                <label for="format" class="form-label"> </label>
+                <select class="form-select" id="resource_type" required>
+                  <option selected disabled value="">Select Image vs AI vector</option>
+                  <option value="raster%3A">Raster</option>
+                  <option value="aiPacks%3A">AI Vector</option>
                 </select>
               </div>
             </div>
@@ -427,14 +440,6 @@
             </div>
 
             <div class="position-relative">
-              <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid5" value="" disabled>
-              <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid5">
-                <strong class="fw-semibold">AI Vector Data</strong>
-                <span class="d-block small opacity-75">Request a Download for AI Vector Data</span>
-              </label>
-            </div>
-
-            <div class="position-relative">
               <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid6" value="North"  >
               <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid6">
                 <strong class="fw-semibold">North Facing Image</strong>
@@ -465,6 +470,69 @@
                 <span class="d-block small opacity-75">West Facing Oblique Image</span>
               </label>
             </div>
+
+
+            <div class="position-relative">
+              <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid10" value="building" >
+              <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid10">
+                <strong class="fw-semibold">AI Vector Data Building</strong>
+                <span class="d-block small opacity-75">Request a Download for AI Vector Data BUILDING TEST</span>
+              </label>
+            </div>
+            
+
+            <div class="position-relative">
+              <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid11" value="surfaces" >
+              <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid11">
+                <strong class="fw-semibold">AI Vector Data Surfaces</strong>
+                <span class="d-block small opacity-75">Request a Download for AI Vector Data SURFACES TEST</span>
+              </label>
+            </div>
+
+            <div class="position-relative">
+              <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid13" value="surface_permeability" >
+              <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid13">
+                <strong class="fw-semibold">AI Vector Data Surface Permeability</strong>
+                <span class="d-block small opacity-75">Request a Download for AI Vector Data surface_permeability TEST</span>
+              </label>
+            </div>
+
+
+            <div class="position-relative">
+              <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid14" value="vegetation" >
+              <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid14">
+                <strong class="fw-semibold">AI Vector Data Vegetation</strong>
+                <span class="d-block small opacity-75">Request a Download for AI Vector Data VEGETATION TEST</span>
+              </label>
+            </div>
+
+            <div class="position-relative">
+              <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid15" value="building_char" >
+              <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid15">
+                <strong class="fw-semibold">AI Vector Data Building Char</strong>
+                <span class="d-block small opacity-75">Request a Download for AI Vector Data Building Char TEST</span>
+              </label>
+            </div>
+
+            <div class="position-relative">
+              <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid16" value="roof_char" >
+              <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid16">
+                <strong class="fw-semibold">AI Vector Data Roof Char</strong>
+                <span class="d-block small opacity-75">Request a Download for AI Vector Data Roof Char TEST</span>
+              </label>
+            </div>
+
+            <div class="position-relative">
+              <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid17" value="poles" >
+              <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid16">
+                <strong class="fw-semibold">AI Vector Poles</strong>
+                <span class="d-block small opacity-75">Request a Download for AI Vector Poles</span>
+              </label>
+            </div>
+
+            
+
+
           </div>
       </div>
     </div>
@@ -473,15 +541,14 @@
     <div class="d-flex justify-content-center">
         <hr class="my-4">
         <button class="w-80 btn btn-primary btn-lg" id="download_button" type="submit" >Download</button>
-      </div>
-      <hr class="my-4">
-      <div class="d-flex justify-content-center">
+    </div>
+    <hr class="my-4">
+    <div class="d-flex justify-content-center">
       <hr class="my-4">
         <button class="w-80 btn btn-primary btn-lg" id="key_test_button" type="submit">Key_Test</button>
     
     </div>
     <hr class="my-4">
-
     <div class="d-flex justify-content-center">
       <hr class="my-4">
       <button class="w-80 btn btn-primary btn-lg" id="coverage_check_button" type="submit" >Check Coverage</button>
